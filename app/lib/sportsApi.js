@@ -7,3 +7,9 @@ export async function getTeamsByLeague(leagueName) {
   const data = await res.json();
   return data.teams || [];
 }
+
+export async function getUpcomingMatches(leagueId) {
+  const res = await fetch(`${BASE_URL}/eventsnextleague.php?id=${leagueId}`);
+  const data = await res.json();
+  return data.events || [];
+}

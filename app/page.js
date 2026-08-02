@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { signIn, signOut, auth } from "@/auth";
 
 export default async function Home() {
@@ -23,7 +24,10 @@ export default async function Home() {
         />
         <h2>Welcome, {session.user.name}!</h2>
         <p>{session.user.email}</p>
-        <form action={handleSignOut}>
+        <p style={{ marginTop: "1.5rem" }}>
+          <Link href="/teams">View Premier League Teams →</Link>
+        </p>
+        <form action={handleSignOut} style={{ marginTop: "1rem" }}>
           <button type="submit">Sign out</button>
         </form>
       </div>

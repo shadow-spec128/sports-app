@@ -1,12 +1,26 @@
-import { getTeamsByLeague } from "@/app/lib/sportsApi";
+import { getTeamsByLeague, getUpcomingMatches } from "@/app/lib/sportsApi";
 import { saveFavoriteTeam } from "@/app/lib/actions";
+import Link from "next/link";
 
 export default async function TeamsPage() {
   const teams = await getTeamsByLeague("English_Premier_League");
+  const matches = await getUpcomingMatches(4328); // 4328 = Premier League's ID on TheSportsDB
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>Premier League Teams</h1>
+      <Link href="/">← Back to Home</Link>
+
+      <h1>Upcoming Premier League Matches</h1>
+      <ul>
+        {matches.length === 0 && <li>No upcoming matches found right now.</li>}
+        {matches.map((match) => (
+          <li key={match.idEvent} style={{ marginBottom: "0.5rem" }}>
+            {match.strHomeTeam} vs {match.strAwayTeam} — {match.dateEvent} {match.strTime}
+          </li>
+        ))}
+      </ul>
+
+      <h1 style={{ marginTop: "2rem" }}>Premier League Teams</h1>
       <ul>
         {teams.map((team) => (
           <li key={team.idTeam} style={{ marginBottom: "1rem" }}>
