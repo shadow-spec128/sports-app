@@ -32,11 +32,12 @@ export default async function Home() {
           >
             View Premier League Teams →
           </Link>
+
           <Link
             href="/favorites"
             className="mt-3 inline-block w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-2 rounded-lg transition"
->
-           My Favorites ★
+          >
+            My Favorites ★
           </Link>
 
           <form action={handleSignOut} className="mt-3">

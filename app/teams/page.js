@@ -1,10 +1,16 @@
-import { getTeamsByLeague, getUpcomingMatches } from "@/app/lib/sportsApi";
+import { getTeamsByLeague, getUpcomingMatches, LEAGUES } from "@/app/lib/sportsApi";
 import { saveFavoriteTeam } from "@/app/lib/actions";
 import Link from "next/link";
 
-export default async function TeamsPage() {
-  const teams = await getTeamsByLeague("English_Premier_League");
-  const matches = await getUpcomingMatches(4328);
+export const dynamic = "force-dynamic";
+
+export default async function TeamsPage({ searchParams }) {
+  const params = await searchParams;
+  const leagueId = params.league || "4328";
+  const currentLeague = LEAGUES.find((l) => l.id === leagueId) || LEAGUES[0];
+
+  const teams = await getTeamsByLeague(currentLeague.query);
+  const matches = await getUpcomingMatches(currentLeague.id);
 
   return (
     <div className="min-h-screen bg-slate-950 text-white px-6 py-10">
@@ -13,7 +19,23 @@ export default async function TeamsPage() {
           ← Back to Home
         </Link>
 
-        <h1 className="text-2xl font-bold mt-6 mb-3">Upcoming Matches</h1>
+        <div className="flex gap-2 flex-wrap mt-6 mb-8">
+          {LEAGUES.map((league) => (
+            <a
+              key={league.id}
+              href={`/teams?league=${league.id}`}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                league.id === leagueId
+                  ? "bg-emerald-600 text-white"
+                  : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
+              }`}
+            >
+              {league.name}
+            </a>
+          ))}
+        </div>
+
+        <h1 className="text-2xl font-bold mb-3">Upcoming {currentLeague.name} Matches</h1>
         <div className="bg-slate-900 rounded-xl border border-slate-800 p-4 mb-10">
           {matches.length === 0 && (
             <p className="text-slate-400 text-sm">No upcoming matches found right now.</p>
@@ -30,8 +52,11 @@ export default async function TeamsPage() {
           ))}
         </div>
 
-        <h1 className="text-2xl font-bold mb-4">Premier League Teams</h1>
+        <h1 className="text-2xl font-bold mb-4">{currentLeague.name} Teams</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {teams.length === 0 && (
+            <p className="text-slate-400 text-sm">No teams found for this league right now.</p>
+          )}
           {teams.map((team) => (
             <div
               key={team.idTeam}
