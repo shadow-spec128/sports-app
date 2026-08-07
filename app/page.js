@@ -30,7 +30,7 @@ export default async function Home() {
             href="/teams"
             className="mt-6 inline-block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded-lg transition"
           >
-            View Premier League Teams →
+            Choose Your Sport →
           </Link>
 
           <Link

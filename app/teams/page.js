@@ -12,6 +12,8 @@ export default async function TeamsPage({ searchParams }) {
   const teams = await getTeamsByLeague(currentLeague.query);
   const matches = await getUpcomingMatches(currentLeague.id);
 
+  const sports = [...new Set(LEAGUES.map((l) => l.sport))];
+
   return (
     <div className="min-h-screen bg-slate-950 text-white px-6 py-10">
       <div className="max-w-3xl mx-auto">
@@ -19,19 +21,26 @@ export default async function TeamsPage({ searchParams }) {
           ← Back to Home
         </Link>
 
-        <div className="flex gap-2 flex-wrap mt-6 mb-8">
-          {LEAGUES.map((league) => (
-            <a
-              key={league.id}
-              href={`/teams?league=${league.id}`}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                league.id === leagueId
-                  ? "bg-emerald-600 text-white"
-                  : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
-              }`}
-            >
-              {league.name}
-            </a>
+        <div className="mt-6 mb-8 space-y-4">
+          {sports.map((sport) => (
+            <div key={sport}>
+              <p className="text-xs uppercase tracking-wide text-slate-500 mb-2">{sport}</p>
+              <div className="flex gap-2 flex-wrap">
+                {LEAGUES.filter((l) => l.sport === sport).map((league) => (
+                  <a
+                    key={league.id}
+                    href={`/teams?league=${league.id}`}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                      league.id === leagueId
+                        ? "bg-emerald-600 text-white"
+                        : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
+                    }`}
+                  >
+                    {league.name}
+                  </a>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
 
@@ -52,7 +61,8 @@ export default async function TeamsPage({ searchParams }) {
           ))}
         </div>
 
-        <h1 className="text-2xl font-bold mb-4">{currentLeague.name} Teams</h1>
+        <h1 className="text-2xl font-bold mb-1">{currentLeague.name} Teams</h1>
+        <p className="text-xs text-slate-500 mb-4">Showing first 10 teams (free API tier limit)</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {teams.length === 0 && (
             <p className="text-slate-400 text-sm">No teams found for this league right now.</p>
@@ -64,7 +74,9 @@ export default async function TeamsPage({ searchParams }) {
             >
               <div className="flex items-center gap-3">
                 <img src={team.strBadge} alt={team.strTeam} className="w-9 h-9 object-contain" />
-                <span className="font-medium">{team.strTeam}</span>
+                <Link href={`/teams/${team.idTeam}?from=teams&league=${currentLeague.id}`} className="font-medium hover:text-emerald-400 transition">
+                  {team.strTeam}
+                </Link>
               </div>
               <form action={saveFavoriteTeam}>
                 <input type="hidden" name="apiTeamId" value={team.idTeam} />

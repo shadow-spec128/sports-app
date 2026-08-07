@@ -36,8 +36,9 @@ export default async function FavoritesPage() {
               key={fav.id}
               className="flex items-center justify-between bg-slate-900 border border-slate-800 rounded-xl p-3"
             >
-              <span className="font-medium">{fav.teamName}</span>
-              <form action={removeFavoriteTeam}>
+              <Link href={`/teams/${fav.apiTeamId}?from=favorites`} className="font-medium hover:text-emerald-400 transition">
+                {fav.teamName}
+              </Link>              <form action={removeFavoriteTeam}>
                 <input type="hidden" name="id" value={fav.id} />
                 <button
                   type="submit"
