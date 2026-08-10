@@ -94,7 +94,8 @@ export default async function TeamDetailPage({ params, searchParams }) {
         </div>
 
         <div className="mt-8">
-          <h2 className="text-lg font-semibold mb-4">Squad</h2>
+          <h2 className="text-lg font-semibold mb-1">Squad</h2>
+          <p className="text-xs text-slate-500 mb-4">Roster data is community-sourced and may not include very recent transfers.</p>
           {players.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
               {players.map((p) => {
