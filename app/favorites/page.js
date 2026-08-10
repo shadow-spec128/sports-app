@@ -4,6 +4,11 @@ import { removeFavoriteTeam } from "@/app/lib/actions";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "My Favorites",
+  description: "Your saved favorite teams across all sports.",
+};
+
 export default async function FavoritesPage() {
   const session = await auth();
   if (!session) redirect("/");

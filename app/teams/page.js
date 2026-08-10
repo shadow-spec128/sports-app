@@ -2,6 +2,14 @@ import { getTeamsByLeague, getUpcomingMatches, LEAGUES } from "@/app/lib/sportsA
 import { saveFavoriteTeam } from "@/app/lib/actions";
 import Link from "next/link";
 
+export const metadata = {
+  title: {
+    default: "Sports App — Track Your Favorite Teams",
+    template: "%s | Sports App",
+  },
+  description: "Browse teams across Premier League, La Liga, NBA, NFL, and NHL. Sign in, save your favorite teams, and check upcoming matches.",
+};
+
 export const dynamic = "force-dynamic";
 
 export default async function TeamsPage({ searchParams }) {

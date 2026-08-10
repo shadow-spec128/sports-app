@@ -3,6 +3,15 @@ import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const team = await getTeamDetails(id);
+  return {
+    title: team ? team.strTeam : "Team",
+    description: team ? `Stadium, squad, and upcoming matches for ${team.strTeam}.` : "Team details",
+  };
+}
+
 export default async function TeamDetailPage({ params, searchParams }) {
   const { id } = await params;
   const sp = await searchParams;
