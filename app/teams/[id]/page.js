@@ -29,21 +29,21 @@ export default async function TeamDetailPage({ params, searchParams }) {
 
   if (!team) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white px-6 py-10">
+      <div className="min-h-screen bg-[#FAF7F2] text-[#111827] px-6 py-10">
         <div className="max-w-3xl mx-auto">
-          <Link href={backHref} className="text-emerald-400 hover:text-emerald-300 text-sm">
+          <Link href={backHref} className="inline-flex items-center gap-1 text-sm font-semibold bg-white text-[#111827] px-3 py-1.5 rounded-lg border-2 border-[#111827] shadow-[2px_2px_0px_0px_#111827] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_#111827] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_#111827]">
             {backLabel}
           </Link>
-          <p className="text-slate-400 mt-6">Team details could not be found.</p>
+          <p className="text-slate-500 mt-6">Team details could not be found.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white px-6 py-10">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#111827] px-6 py-10">
       <div className="max-w-5xl mx-auto">
-        <Link href={backHref} className="text-emerald-400 hover:text-emerald-300 text-sm">
+        <Link href={backHref} className="inline-flex items-center gap-1 text-sm font-semibold bg-white text-[#111827] px-3 py-1.5 rounded-lg border-2 border-[#111827] shadow-[2px_2px_0px_0px_#111827] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_#111827] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_#111827]">
           {backLabel}
         </Link>
 
@@ -53,42 +53,42 @@ export default async function TeamDetailPage({ params, searchParams }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <div className="bg-white border-2 border-[#111827] rounded-xl shadow-[4px_4px_0px_0px_#111827] p-5">
             <h2 className="text-lg font-semibold mb-3">About</h2>
-            <div className="space-y-2 text-sm text-slate-300">
-              {team.strStadium && <p><span className="text-slate-500">Stadium:</span> {team.strStadium}</p>}
-              {team.strStadiumLocation && <p><span className="text-slate-500">Location:</span> {team.strStadiumLocation}</p>}
-              {team.strCountry && <p><span className="text-slate-500">Country:</span> {team.strCountry}</p>}
-              {team.intFormedYear && <p><span className="text-slate-500">Founded:</span> {team.intFormedYear}</p>}
+            <div className="space-y-2 text-sm text-slate-600">
+              {team.strStadium && <p><span className="text-slate-400">Stadium:</span> {team.strStadium}</p>}
+              {team.strStadiumLocation && <p><span className="text-slate-400">Location:</span> {team.strStadiumLocation}</p>}
+              {team.strCountry && <p><span className="text-slate-400">Country:</span> {team.strCountry}</p>}
+              {team.intFormedYear && <p><span className="text-slate-400">Founded:</span> {team.intFormedYear}</p>}
             </div>
 
             {team.strDescriptionEN && (
-              <p className="text-sm text-slate-400 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 {team.strDescriptionEN.slice(0, 600)}
                 {team.strDescriptionEN.length > 600 && "…"}
               </p>
             )}
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <div className="bg-white border-2 border-[#111827] rounded-xl shadow-[4px_4px_0px_0px_#111827] p-5">
             <h2 className="text-lg font-semibold mb-3">Next Match</h2>
             {nextMatch ? (
-              <p className="text-sm text-slate-300">
+              <p className="text-sm text-slate-700">
                 {nextMatch.strHomeTeam} vs {nextMatch.strAwayTeam}
-                <span className="block text-slate-500 mt-1">{nextMatch.dateEvent} · {nextMatch.strTime}</span>
+                <span className="block text-slate-400 mt-1">{nextMatch.dateEvent} · {nextMatch.strTime}</span>
               </p>
             ) : (
-              <p className="text-sm text-slate-400">No upcoming match found.</p>
+              <p className="text-sm text-slate-500">No upcoming match found.</p>
             )}
 
             <h2 className="text-lg font-semibold mt-6 mb-3">Last Match</h2>
             {lastMatch ? (
-              <p className="text-sm text-slate-300">
+              <p className="text-sm text-slate-700">
                 {lastMatch.strHomeTeam} {lastMatch.intHomeScore ?? "-"} : {lastMatch.intAwayScore ?? "-"} {lastMatch.strAwayTeam}
-                <span className="block text-slate-500 mt-1">{lastMatch.dateEvent}</span>
+                <span className="block text-slate-400 mt-1">{lastMatch.dateEvent}</span>
               </p>
             ) : (
-              <p className="text-sm text-slate-400">No recent match found.</p>
+              <p className="text-sm text-slate-500">No recent match found.</p>
             )}
           </div>
         </div>
@@ -106,21 +106,21 @@ export default async function TeamDetailPage({ params, searchParams }) {
                       <img
                         src={photo}
                         alt={p.strPlayer}
-                        className="w-20 h-20 rounded-full object-cover bg-slate-800 border border-slate-700"
+                        className="w-20 h-20 rounded-full object-cover bg-white border-2 border-[#111827]"
                       />
                     ) : (
-                      <div className="w-20 h-20 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-500 text-lg font-semibold">
+                      <div className="w-20 h-20 rounded-full bg-white border-2 border-[#111827] flex items-center justify-center text-slate-400 text-lg font-semibold">
                         {p.strPlayer?.charAt(0)}
                       </div>
                     )}
-                    <p className="text-xs font-medium mt-2">{p.strPlayer}</p>
+                    <p className="text-xs font-semibold mt-2">{p.strPlayer}</p>
                     <p className="text-xs text-slate-500">{p.strPosition}</p>
                   </div>
                 );
               })}
             </div>
           ) : (
-            <p className="text-sm text-slate-400">Squad information is not available for this team on the free plan.</p>
+            <p className="text-sm text-slate-500">Squad information is not available for this team on the free plan.</p>
           )}
         </div>
       </div>

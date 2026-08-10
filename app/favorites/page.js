@@ -18,36 +18,37 @@ export default async function FavoritesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white px-6 py-10">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#111827] px-6 py-10">
       <div className="max-w-3xl mx-auto">
-        <Link href="/" className="text-emerald-400 hover:text-emerald-300 text-sm">
+        <Link href="/" className="inline-flex items-center gap-1 text-sm font-semibold bg-white text-[#111827] px-3 py-1.5 rounded-lg border-2 border-[#111827] shadow-[2px_2px_0px_0px_#111827] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_#111827] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_#111827]">
           ← Back to Home
         </Link>
 
         <h1 className="text-2xl font-bold mt-6 mb-6">My Favorite Teams</h1>
 
         {favorites.length === 0 && (
-          <p className="text-slate-400">
+          <p className="text-slate-500">
             You have not saved any teams yet.{" "}
-            <Link href="/teams" className="text-emerald-400 hover:text-emerald-300">
+            <Link href="/teams" className="text-[#FF5A36] font-semibold hover:underline">
               Browse teams →
             </Link>
           </p>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {favorites.map((fav) => (
             <div
               key={fav.id}
-              className="flex items-center justify-between bg-slate-900 border border-slate-800 rounded-xl p-3"
+              className="flex items-center justify-between bg-white border-2 border-[#111827] rounded-xl shadow-[3px_3px_0px_0px_#111827] p-3 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_0px_#111827]"
             >
-              <Link href={`/teams/${fav.apiTeamId}?from=favorites`} className="font-medium hover:text-emerald-400 transition">
+              <Link href={`/teams/${fav.apiTeamId}?from=favorites`} className="font-semibold hover:text-[#FF5A36] transition">
                 {fav.teamName}
-              </Link>              <form action={removeFavoriteTeam}>
+              </Link>
+              <form action={removeFavoriteTeam}>
                 <input type="hidden" name="id" value={fav.id} />
                 <button
                   type="submit"
-                  className="text-xs bg-red-600/80 hover:bg-red-500 text-white px-3 py-1.5 rounded-lg transition"
+                  className="text-xs bg-white text-[#111827] font-semibold px-3 py-1.5 rounded-lg border-2 border-[#111827] shadow-[2px_2px_0px_0px_#111827] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_#111827] hover:bg-red-50 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_#111827]"
                 >
                   Remove
                 </button>
