@@ -1,4 +1,4 @@
-import { getFootballNews } from "@/app/lib/newsapi";
+import { getFootballNews } from "@/app/lib/newsApi";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
