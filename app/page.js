@@ -39,7 +39,12 @@ export default async function Home() {
           >
             My Favorites ★
           </Link>
-
+           <Link
+            href="/news"
+            className="mt-3 inline-block w-full bg-white text-[#111827] font-semibold py-2.5 rounded-xl border-2 border-[#111827] shadow-[4px_4px_0px_0px_#111827] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_#111827] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0px_0px_#111827]"
+          >
+            Football News 📰
+          </Link>
           <form action={handleSignOut} className="mt-4">
             <button
               type="submit"
