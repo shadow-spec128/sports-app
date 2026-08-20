@@ -20,9 +20,12 @@ export default async function TeamsPage({ searchParams }) {
   const sports = [...new Set(LEAGUES.map((l) => l.sport))];
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#111827] px-6 py-10">
+    <div className="min-h-screen bg-gradient-to-br from-sky-200 via-cyan-100 to-emerald-200 px-6 py-10">
       <div className="max-w-3xl mx-auto">
-        <Link href="/" className="inline-flex items-center gap-1 text-sm font-semibold bg-white text-[#111827] px-3 py-1.5 rounded-lg border-2 border-[#111827] shadow-[2px_2px_0px_0px_#111827] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_#111827] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_#111827]">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1 text-sm font-semibold bg-white/60 backdrop-blur border border-white/70 text-slate-700 px-4 py-2 rounded-full transition-all duration-300 hover:bg-white/80 hover:-translate-y-0.5"
+        >
           ← Back to Home
         </Link>
 
@@ -37,10 +40,10 @@ export default async function TeamsPage({ searchParams }) {
                     <a
                       key={league.id}
                       href={`/teams?league=${league.id}`}
-                      className={`px-4 py-2 rounded-xl text-sm font-semibold border-2 border-[#111827] transition-all duration-150 ${
+                      className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
                         active
-                          ? "bg-[#111827] text-white shadow-[3px_3px_0px_0px_#FF5A36]"
-                          : "bg-white text-[#111827] shadow-[3px_3px_0px_0px_#111827] hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_0px_#111827] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_#111827]"
+                          ? "bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-lg shadow-orange-300/40"
+                          : "bg-white/60 backdrop-blur border border-white/70 text-slate-700 hover:bg-white/80 hover:-translate-y-0.5"
                       }`}
                     >
                       {league.name}
@@ -52,13 +55,13 @@ export default async function TeamsPage({ searchParams }) {
           ))}
         </div>
 
-        <h1 className="text-2xl font-bold mb-1">Upcoming {currentLeague.name} Matches</h1>
-        <div className="bg-white border-2 border-[#111827] rounded-xl shadow-[4px_4px_0px_0px_#111827] p-4 mb-10 mt-3">
+        <h1 className="text-2xl font-bold text-slate-800 mb-1">Upcoming {currentLeague.name} Matches</h1>
+        <div className="bg-white/50 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg shadow-slate-300/30 p-4 mb-10 mt-3">
           {matches.length === 0 && (
             <p className="text-slate-500 text-sm">No upcoming matches found right now.</p>
           )}
           {matches.map((match) => (
-            <div key={match.idEvent} className="text-[#111827]">
+            <div key={match.idEvent} className="text-slate-800">
               <span className="font-semibold">{match.strHomeTeam}</span>
               <span className="text-slate-400 mx-2">vs</span>
               <span className="font-semibold">{match.strAwayTeam}</span>
@@ -69,7 +72,7 @@ export default async function TeamsPage({ searchParams }) {
           ))}
         </div>
 
-        <h1 className="text-2xl font-bold mb-1">{currentLeague.name} Teams</h1>
+        <h1 className="text-2xl font-bold text-slate-800 mb-1">{currentLeague.name} Teams</h1>
         <p className="text-xs text-slate-500 mb-4">Showing first 10 teams (free API tier limit)</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {teams.length === 0 && (
@@ -78,11 +81,11 @@ export default async function TeamsPage({ searchParams }) {
           {teams.map((team) => (
             <div
               key={team.idTeam}
-              className="flex items-center justify-between bg-white border-2 border-[#111827] rounded-xl shadow-[3px_3px_0px_0px_#111827] p-3 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_0px_#111827]"
+              className="flex items-center justify-between bg-white/50 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg shadow-slate-300/30 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
             >
               <div className="flex items-center gap-3">
                 <img src={team.strBadge} alt={team.strTeam} className="w-9 h-9 object-contain" />
-                <Link href={`/teams/${team.idTeam}?from=teams&league=${currentLeague.id}`} className="font-semibold hover:text-[#FF5A36] transition">
+                <Link href={`/teams/${team.idTeam}?from=teams&league=${currentLeague.id}`} className="font-semibold text-slate-800 hover:text-orange-500 transition">
                   {team.strTeam}
                 </Link>
               </div>
@@ -91,7 +94,7 @@ export default async function TeamsPage({ searchParams }) {
                 <input type="hidden" name="teamName" value={team.strTeam} />
                 <button
                   type="submit"
-                  className="text-xs bg-[#FF5A36] text-white font-semibold px-3 py-1.5 rounded-lg border-2 border-[#111827] shadow-[2px_2px_0px_0px_#111827] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_#111827] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_#111827]"
+                  className="text-xs bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold px-3 py-1.5 rounded-full shadow-md shadow-orange-300/40 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Save
                 </button>
